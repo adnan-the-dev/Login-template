@@ -1,43 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Login Form</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<head>
-  <title>Login Form</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
+  <body>
+    <section>
+      <div class="login-box">
+        <form onsubmit="return sub()">
+          <h2>Login</h2>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+            <input type="email" id="email" value="" />
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"
+              ><ion-icon name="lock-closed" onclick="show()"></ion-icon
+            ></span>
+            <input type="password" id="passwords" value="" />
+            <label>Password</label>
+          </div>
+          <p id="error"></p>
+          <div class="remember-forgot">
+            <label><input type="checkbox" />Remember</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit">Login</button>
+          <div class="register-link">
+            <p>Don't have an account?<a href="#">Rigister</a></p>
+          </div>
+        </form>
+      </div>
 
-<body>
-  <section>
-    <div class="login-box">
-      <form action="">
-        <h2>Login</h2>
-        <div class="input-box">
-          <span class="icon"><ion-icon name="mail"></ion-icon></span>
-          <input type="email" required>
-          <label>Email</label>
-        </div>
-        <div class="input-box">
-          <span class="icon"><ion-icon name="lock-closed"></ion-icon>
-          </span>
-          <input type="password" required>
-          <label>Password</label>
-        </div>
-        <div class="remember-forgot">
-          <label><input type="checkbox">Remember</label>
-          <a href="#">Forgot Password?</a>
-        </div>
-        <button type="submit">Login</button>
-        <div class="register-link">
-          <p>Don't have an account?<a href="#">Rigister</a></p>
-        </div>
-      </form>
-    </div>
-  </section>
-
-
-
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-
+      <script>
+        function sub() {
+          let pasVal = document.getElementById("passwords").value;
+          let specialChr =
+            /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]/;
+          if (pasVal == "") {
+            document.getElementById("error").innerHTML =
+              "** please fill password";
+            return false;
+          }
+          if (pasVal.length < 5) {
+            document.getElementById("error").innerHTML = "Minimum 5 Characters";
+            return false;
+          }
+          if (pasVal.length > 15) {
+            document.getElementById("error").innerHTML =
+              "Maximum 15 Characters";
+            return false;
+          }
+          if (!specialChr.test(pasVal)) {
+            document.getElementById("error").innerHTML =
+              "Be includes special characters and one digit";
+            return false;
+          } else if (specialChr.test(pasVal)) {
+            alert("Your password is correct");
+          }
+        }
+        function show() {
+          let a = document.getElementById("passwords");
+          if (a.type === "password") {
+            a.type = "text";
+          } else {
+            a.type = "password";
+          }
+        }
+      </script>
+    </section>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>
